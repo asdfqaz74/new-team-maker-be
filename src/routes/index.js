@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const userRoutes = require("./user.routes");
 
 // Example route
 router.get("/health", (req, res) => {
@@ -9,5 +10,7 @@ router.get("/health", (req, res) => {
     timestamp: new Date(),
   });
 });
+
+router.use("/users", userRoutes);
 
 module.exports = router;
