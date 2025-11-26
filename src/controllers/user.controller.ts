@@ -1,11 +1,19 @@
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import * as userService from "@/services/user.service";
 import { ServiceError } from "@/errors";
+import { RegisterUserDTO } from "@/dto/register-user.dto";
 
-export const register = async (req: Request, res: Response): Promise<void> => {
+export const register = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
-    const userData = req.body;
-    const newUser = await userService.registerUser(userData);
+    const dto = new RegisterUserDTO(req.body);
+    dto.sanitize();
+    dto.validate();
+
+    const newUser = await userService.registerUser(dto.toServiceData());
 
     res.status(201).json({
       success: true,

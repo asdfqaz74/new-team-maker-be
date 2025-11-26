@@ -2,20 +2,8 @@ import * as userRepository from "@/repositories/user.repository";
 import { IUser } from "@/models/user.model";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import {
-  validateEmail,
-  validatePassword,
-  validateUserId,
-} from "@utils/validateRegister";
 import { ServiceError, ErrorCode } from "@/errors";
-
-interface UserData {
-  email: string;
-  password: string;
-  passwordConfirm: string;
-  realName: string;
-  userId: string;
-}
+import type { RegisterUserData } from "@/dto/register-user.dto";
 
 interface LoginResult {
   user: IUser;
@@ -25,28 +13,9 @@ interface LoginResult {
 /* -------------------------------------------- */
 /*                   유저 등록 서비스                  */
 /* -------------------------------------------- */
-export const registerUser = async (userData: UserData): Promise<IUser> => {
-  /* ------------------ 유효성 검증 ------------------ */
-  // 1. 이메일 형식 검증
-  if (!validateEmail(userData.email)) {
-    throw new ServiceError(ErrorCode.INVALID_EMAIL_FORMAT);
-  }
-
-  // 2. 아이디 형식 검증
-  if (!validateUserId(userData.userId)) {
-    throw new ServiceError(ErrorCode.INVALID_USERID_FORMAT);
-  }
-
-  // 3. 비밀번호 형식 검증
-  if (!validatePassword(userData.password)) {
-    throw new ServiceError(ErrorCode.INVALID_PASSWORD_FORMAT);
-  }
-
-  // 4 . 비밀번호와 비밀번호 확인 일치 여부 검증
-  if (userData.password !== userData.passwordConfirm) {
-    throw new ServiceError(ErrorCode.PASSWORD_MISMATCH);
-  }
-
+export const registerUser = async (
+  userData: RegisterUserData
+): Promise<IUser> => {
   /* ------------------- 중복 검사 ------------------ */
   // 1. 이메일 중복 확인
   const existingUser = await userRepository.findByEmail(userData.email);
@@ -65,12 +34,8 @@ export const registerUser = async (userData: UserData): Promise<IUser> => {
   const hashedPassword = await bcrypt.hash(userData.password, salt);
 
   /* ----------------- 유저 정보 저장 ----------------- */
-  // 1. 유저 필드 저장 정보 제외
-  const { passwordConfirm, ...safeData } = userData;
-
-  // 2. 유저 생성
   const newUser = await userRepository.create({
-    ...safeData,
+    ...userData,
     password: hashedPassword,
   });
 
