@@ -8,6 +8,8 @@ export const ErrorCode = {
   INVALID_PASSWORD_FORMAT: "INVALID_PASSWORD_FORMAT",
   PASSWORD_MISMATCH: "PASSWORD_MISMATCH",
   INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
+  INVALID_REFRESH_TOKEN: "INVALID_REFRESH_TOKEN",
+  UNAUTHORIZED: "UNAUTHORIZED",
 
   // 유저 관련
   USER_NOT_FOUND: "USER_NOT_FOUND",
@@ -30,6 +32,8 @@ export const ErrorMessages: Record<ErrorCodeType, string> = {
     "비밀번호는 최소 8자, 최대 15자이며, 하나의 대문자, 하나의 소문자, 하나의 숫자, 하나의 특수문자를 포함해야 합니다.",
   PASSWORD_MISMATCH: "비밀번호와 비밀번호 확인이 일치하지 않습니다.",
   INVALID_CREDENTIALS: "이메일 또는 비밀번호가 올바르지 않습니다.",
+  INVALID_REFRESH_TOKEN: "유효하지 않은 리프레시 토큰입니다.",
+  UNAUTHORIZED: "인증이 필요합니다.",
   USER_NOT_FOUND: "존재하지 않는 유저입니다.",
   INTERNAL_SERVER_ERROR: "서버 내부 오류가 발생했습니다.",
   VALIDATION_ERROR: "입력값 검증에 실패했습니다.",

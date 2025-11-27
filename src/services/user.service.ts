@@ -7,8 +7,17 @@ import type { RegisterUserData } from "@/dto/register-user.dto";
 
 interface LoginResult {
   user: IUser;
-  token: string;
+  accessToken: string;
+  refreshToken: string;
 }
+
+interface TokenPayload {
+  id: string;
+}
+
+// 토큰 만료 시간 설정
+const ACCESS_TOKEN_EXPIRES = "15m"; // 15분
+const REFRESH_TOKEN_EXPIRES = "7d"; // 7일
 
 /* -------------------------------------------- */
 /*                   유저 등록 서비스                  */
@@ -62,15 +71,73 @@ export const loginUser = async (
   }
 
   // 3. 토큰 생성
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || "secret", {
-    expiresIn: "1d",
-  });
+  const accessToken = jwt.sign(
+    { id: user._id },
+    process.env.JWT_SECRET || "secret",
+    { expiresIn: ACCESS_TOKEN_EXPIRES }
+  );
+
+  const refreshToken = jwt.sign(
+    { id: user._id },
+    process.env.JWT_REFRESH_SECRET || "refresh-secret",
+    { expiresIn: REFRESH_TOKEN_EXPIRES }
+  );
 
   // 4. 비밀번호 제외하고 반환
   const userWithoutPassword = user.toObject();
   delete userWithoutPassword.password;
 
-  return { user: userWithoutPassword as IUser, token };
+  return { user: userWithoutPassword as IUser, accessToken, refreshToken };
+};
+
+/* -------------------------------------------- */
+/*              Refresh Token으로 재발급              */
+/* -------------------------------------------- */
+export const refreshAccessToken = async (
+  refreshToken: string
+): Promise<{ accessToken: string }> => {
+  try {
+    // 1. Refresh Token 검증
+    const decoded = jwt.verify(
+      refreshToken,
+      process.env.JWT_REFRESH_SECRET || "refresh-secret"
+    ) as TokenPayload;
+
+    // 2. 유저 존재 확인
+    const user = await userRepository.findById(decoded.id);
+    if (!user) {
+      throw new ServiceError(ErrorCode.USER_NOT_FOUND);
+    }
+
+    // 3. 새 Access Token 발급
+    const accessToken = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET || "secret",
+      { expiresIn: ACCESS_TOKEN_EXPIRES }
+    );
+
+    return { accessToken };
+  } catch (error) {
+    if (error instanceof ServiceError) {
+      throw error;
+    }
+    throw new ServiceError(ErrorCode.INVALID_REFRESH_TOKEN);
+  }
+};
+
+/* -------------------------------------------- */
+/*                현재 유저 정보 조회                  */
+/* -------------------------------------------- */
+export const getCurrentUser = async (userId: string): Promise<IUser> => {
+  const user = await userRepository.findById(userId);
+  if (!user) {
+    throw new ServiceError(ErrorCode.USER_NOT_FOUND);
+  }
+
+  const userWithoutPassword = user.toObject();
+  delete userWithoutPassword.password;
+
+  return userWithoutPassword as IUser;
 };
 
 /* -------------------------------------------- */
