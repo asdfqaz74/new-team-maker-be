@@ -36,14 +36,21 @@ export const register = async (
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { email, password } = req.body;
-    const { user, token } = await userService.loginUser(email, password);
+    const { userId, password } = req.body;
+    const { user, token } = await userService.loginUser(userId, password);
+
+    // HttpOnly 쿠키에 토큰 저장
+    res.cookie("accessToken", token, {
+      httpOnly: true, // JS에서 접근 불가 (XSS 방지)
+      secure: process.env.NODE_ENV === "production", // HTTPS에서만 전송 (프로덕션)
+      sameSite: "strict", // CSRF 방지
+      maxAge: 24 * 60 * 60 * 1000, // 1일 (밀리초)
+    });
 
     res.status(200).json({
       success: true,
       data: {
         user,
-        token,
       },
     });
   } catch (error) {
@@ -51,6 +58,27 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       res.status(error.statusCode).json(error.toJSON());
       return;
     }
+    res.status(500).json({
+      success: false,
+      error: {
+        code: "INTERNAL_SERVER_ERROR",
+        message: (error as Error).message,
+      },
+    });
+  }
+};
+
+export const logout = async (req: Request, res: Response): Promise<void> => {
+  try {
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+    res.status(200).json({
+      success: true,
+      message: "성공적으로 로그아웃 되었습니다.",
+    });
+  } catch (error) {
     res.status(500).json({
       success: false,
       error: {

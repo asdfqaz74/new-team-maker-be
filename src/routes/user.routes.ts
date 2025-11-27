@@ -9,6 +9,9 @@ router.post("/register", userController.register);
 // POST /api/users/login
 router.post("/login", userController.login);
 
+// POST /api/users/logout
+router.post("/logout", userController.logout);
+
 // PUT /api/users/:userId
 router.put("/:userId", userController.updateUser);
 

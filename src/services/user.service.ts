@@ -46,11 +46,11 @@ export const registerUser = async (
 /*                   유저 로그인 서비스                  */
 /* -------------------------------------------- */
 export const loginUser = async (
-  email: string,
+  userId: string,
   password: string
 ): Promise<LoginResult> => {
   // 1. 유저 확인
-  const user = await userRepository.findByEmail(email);
+  const user = await userRepository.findByUserId(userId);
   if (!user) {
     throw new ServiceError(ErrorCode.INVALID_CREDENTIALS);
   }
@@ -66,7 +66,11 @@ export const loginUser = async (
     expiresIn: "1d",
   });
 
-  return { user, token };
+  // 4. 비밀번호 제외하고 반환
+  const userWithoutPassword = user.toObject();
+  delete userWithoutPassword.password;
+
+  return { user: userWithoutPassword as IUser, token };
 };
 
 /* -------------------------------------------- */
@@ -77,7 +81,7 @@ export const updateUser = async (
   updateData: Partial<IUser>
 ): Promise<IUser | null> => {
   // 유저 존재 여부 확인
-  const user = await userRepository.findById(userId);
+  const user = await userRepository.findByUserId(userId);
   if (!user) {
     throw new ServiceError(ErrorCode.USER_NOT_FOUND);
   }

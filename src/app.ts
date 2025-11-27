@@ -1,11 +1,17 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import connectDB from "@/config/db";
 import routes from "@/routes";
 
-dotenv.config();
+// 환경에 따라 다른 .env 파일 로드
+const envFile =
+  process.env.NODE_ENV === "production"
+    ? ".env.production"
+    : ".env.development";
+dotenv.config({ path: envFile });
 
 // Connect to Database
 connectDB();
@@ -14,8 +20,14 @@ const app: Application = express();
 const PORT: number = Number(process.env.PORT) || 3000;
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:5173", // 프론트엔드 주소
+    credentials: true, // 쿠키 허용
+  })
+);
 app.use(morgan("dev"));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
