@@ -1,3 +1,4 @@
+import { riotApi } from "@/api/riot.api";
 interface PlayerPUUID {
   puuid: string;
 }
@@ -5,8 +6,6 @@ interface PlayerPUUID {
 /* -------------------------------------------- */
 /*                    플레이어 등록                   */
 /* -------------------------------------------- */
-
-import axios from "axios";
 
 // 플레이어 정보 등록
 // - 플레이어 이름
@@ -32,15 +31,10 @@ export const verifyPlayer = async (
   tagLine: string
 ): Promise<PlayerPUUID> => {
   // Riot API 호출
-  const riotAPIResponse = await axios.get(
-    `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(
+  const riotAPIResponse = await riotApi(
+    `/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(
       gameName
-    )}/${encodeURIComponent(tagLine)}`,
-    {
-      headers: {
-        "X-Riot-Token": process.env.RIOT_API_KEY,
-      },
-    }
+    )}/${encodeURIComponent(tagLine)}`
   );
 
   const puuid = riotAPIResponse.data.puuid;
