@@ -1,17 +1,18 @@
-import express, { Application, Request, Response, NextFunction } from "express";
-import cors from "cors";
-import morgan from "morgan";
-import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import connectDB from "@/config/db";
-import routes from "@/routes";
 
-// 환경에 따라 다른 .env 파일 로드
+// 환경에 따라 다른 .env 파일 로드 (다른 모듈보다 먼저 실행)
 const envFile =
   process.env.NODE_ENV === "production"
     ? ".env.production"
     : ".env.development";
 dotenv.config({ path: envFile });
+
+import express, { Application, Request, Response, NextFunction } from "express";
+import cors from "cors";
+import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import connectDB from "@/config/db";
+import routes from "@/routes";
 
 // Connect to Database
 connectDB();

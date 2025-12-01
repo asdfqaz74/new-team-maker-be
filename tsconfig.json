@@ -5,15 +5,16 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@utils/*": ["util/*"]
+      "@utils/*": ["utils/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "outDir": "./dist",
-    "rootDir": "."
+    "rootDir": ".",
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*", "util/**/*"],
+  "include": ["src/**/*", "utils/**/*"],
   "exclude": ["node_modules", "dist"]
 }

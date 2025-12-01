@@ -6,10 +6,3 @@ export const riotApi = axios.create({
     "X-Riot-Token": process.env.RIOT_API_KEY || "",
   },
 });
-
-const addApiKey = (config: any) => {
-  config.headers["X-Riot-Token"] = process.env.RIOT_API_KEY || "";
-  return config;
-};
-
-riotApi.interceptors.request.use(addApiKey);

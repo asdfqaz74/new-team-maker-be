@@ -31,7 +31,7 @@ export const verifyPlayer = async (
   tagLine: string
 ): Promise<PlayerPUUID> => {
   // Riot API 호출
-  const riotAPIResponse = await riotApi(
+  const riotAPIResponse = await riotApi.get(
     `/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(
       gameName
     )}/${encodeURIComponent(tagLine)}`

@@ -1,0 +1,1220 @@
+{
+  "metadata": {
+    "gameLength": 1882074,
+    "gameDuration": 1882,
+    "winTeam": "BLUE",
+    "playTime": 1882
+  },
+  "stats": [
+    {
+      "kills": "7",
+      "deaths": "2",
+      "assists": "4",
+      "doubleKills": "0",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "11718",
+      "items": [
+        {
+          "id": "1037",
+          "name": "곡괭이"
+        },
+        {
+          "id": "1054",
+          "name": "도란의 방패"
+        },
+        {
+          "id": "3156",
+          "name": "맬모셔스의 아귀"
+        },
+        {
+          "id": "6692",
+          "name": "월식"
+        },
+        {
+          "id": "3173",
+          "name": "사슬끈 분쇄자"
+        },
+        {
+          "id": "2021",
+          "name": "땅굴 채굴기"
+        },
+        {
+          "id": "3364",
+          "name": "예언자의 렌즈"
+        }
+      ],
+      "level": "18",
+      "magicDamageDealt": "843",
+      "magicDamageToChampions": "843",
+      "magicDamageTaken": "16559",
+      "physicalDamageDealt": "138350",
+      "physicalDamageToChampions": "23875",
+      "physicalDamageTaken": "12233",
+      "trueDamageDealt": "8751",
+      "trueDamageToChampions": "1455",
+      "trueDamageTaken": "1652",
+      "totalDamageDealt": "147945",
+      "totalDamageToChampions": "26174",
+      "totalDamageTaken": "30444",
+      "creepScore": "188",
+      "visionScore": "20",
+      "controlWardsBought": "2",
+      "wardsKilled": "1",
+      "wardsPlaced": "5",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8400",
+            "name": "결의"
+          },
+          "keystone": {
+            "id": "8437",
+            "name": "착취의 손아귀"
+          },
+          "slots": [
+            {
+              "id": "8401",
+              "name": "보호막 강타"
+            },
+            {
+              "id": "8444",
+              "name": "재생의 바람"
+            },
+            {
+              "id": "8451",
+              "name": "과잉성장"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8100",
+            "name": "지배"
+          },
+          "slots": [
+            {
+              "id": "8143",
+              "name": "돌발 일격"
+            },
+            {
+              "id": "8106",
+              "name": "궁극의 사냥꾼"
+            }
+          ]
+        },
+        "statPerks": [
+          "5008",
+          "5008",
+          "5001"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "12",
+          "name": "순간이동"
+        },
+        {
+          "id": "4",
+          "name": "점멸"
+        }
+      ],
+      "riotIdGameName": "지존민철",
+      "riotIdTagLine": "KR1",
+      "champion": "Ambessa",
+      "team": "BLUE",
+      "position": "TOP",
+      "win": true
+    },
+    {
+      "kills": "13",
+      "deaths": "0",
+      "assists": "8",
+      "doubleKills": "2",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "15898",
+      "items": [
+        {
+          "id": "3508",
+          "name": "정수 약탈자"
+        },
+        {
+          "id": "3094",
+          "name": "고속 연사포"
+        },
+        {
+          "id": "3072",
+          "name": "피바라기"
+        },
+        {
+          "id": "3161",
+          "name": "쇼진의 창"
+        },
+        {
+          "id": "1018",
+          "name": "민첩성의 망토"
+        },
+        {
+          "id": "3171",
+          "name": "핏빛 명석함"
+        },
+        {
+          "id": "3363",
+          "name": "망원형 개조"
+        }
+      ],
+      "level": "16",
+      "magicDamageDealt": "15357",
+      "magicDamageToChampions": "4714",
+      "magicDamageTaken": "3995",
+      "physicalDamageDealt": "164743",
+      "physicalDamageToChampions": "22881",
+      "physicalDamageTaken": "5893",
+      "trueDamageDealt": "8957",
+      "trueDamageToChampions": "2005",
+      "trueDamageTaken": "598",
+      "totalDamageDealt": "189059",
+      "totalDamageToChampions": "29600",
+      "totalDamageTaken": "10487",
+      "creepScore": "252",
+      "visionScore": "13",
+      "controlWardsBought": "1",
+      "wardsKilled": "2",
+      "wardsPlaced": "9",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8000",
+            "name": "정밀"
+          },
+          "keystone": {
+            "id": "8021",
+            "name": "기민한 발놀림"
+          },
+          "slots": [
+            {
+              "id": "8009",
+              "name": "침착"
+            },
+            {
+              "id": "9103",
+              "name": "전설: 핏빛 길"
+            },
+            {
+              "id": "8017",
+              "name": "체력차 극복"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8300",
+            "name": "영감"
+          },
+          "slots": [
+            {
+              "id": "8304",
+              "name": "마법의 신발"
+            },
+            {
+              "id": "8345",
+              "name": "비스킷 배달"
+            }
+          ]
+        },
+        "statPerks": [
+          "5005",
+          "5008",
+          "5011"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "21",
+          "name": "방어막"
+        },
+        {
+          "id": "4",
+          "name": "점멸"
+        }
+      ],
+      "riotIdGameName": "정서불안",
+      "riotIdTagLine": "서 카",
+      "champion": "Smolder",
+      "team": "BLUE",
+      "position": "BOTTOM",
+      "win": true
+    },
+    {
+      "kills": "6",
+      "deaths": "0",
+      "assists": "12",
+      "doubleKills": "0",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "12091",
+      "items": [
+        {
+          "id": "2421",
+          "name": "부서진 팔목 보호대"
+        },
+        {
+          "id": "4645",
+          "name": "그림자불꽃"
+        },
+        {
+          "id": "1056",
+          "name": "도란의 반지"
+        },
+        {
+          "id": "2503",
+          "name": "어둠불꽃 횃불"
+        },
+        {
+          "id": "3158",
+          "name": "명석함의 아이오니아 장화"
+        },
+        {
+          "id": "3041",
+          "name": "메자이의 영혼약탈자"
+        },
+        {
+          "id": "3340",
+          "name": "투명 와드"
+        }
+      ],
+      "level": "17",
+      "magicDamageDealt": "137642",
+      "magicDamageToChampions": "31759",
+      "magicDamageTaken": "7368",
+      "physicalDamageDealt": "10480",
+      "physicalDamageToChampions": "717",
+      "physicalDamageTaken": "5540",
+      "trueDamageDealt": "5791",
+      "trueDamageToChampions": "0",
+      "trueDamageTaken": "199",
+      "totalDamageDealt": "153913",
+      "totalDamageToChampions": "32476",
+      "totalDamageTaken": "13107",
+      "creepScore": "207",
+      "visionScore": "35",
+      "controlWardsBought": "5",
+      "wardsKilled": "6",
+      "wardsPlaced": "15",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8200",
+            "name": "마법"
+          },
+          "keystone": {
+            "id": "8214",
+            "name": "콩콩이 소환"
+          },
+          "slots": [
+            {
+              "id": "8226",
+              "name": "마나순환 팔찌"
+            },
+            {
+              "id": "8210",
+              "name": "깨달음"
+            },
+            {
+              "id": "8237",
+              "name": "주문 작열"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8400",
+            "name": "결의"
+          },
+          "slots": [
+            {
+              "id": "8401",
+              "name": "보호막 강타"
+            },
+            {
+              "id": "8473",
+              "name": "뼈 방패"
+            }
+          ]
+        },
+        "statPerks": [
+          "5005",
+          "5008",
+          "5001"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "12",
+          "name": "순간이동"
+        },
+        {
+          "id": "4",
+          "name": "점멸"
+        }
+      ],
+      "riotIdGameName": "야만인",
+      "riotIdTagLine": "KR1",
+      "champion": "Viktor",
+      "team": "BLUE",
+      "position": "MIDDLE",
+      "win": true
+    },
+    {
+      "kills": "0",
+      "deaths": "2",
+      "assists": "16",
+      "doubleKills": "0",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "11569",
+      "items": [
+        {
+          "id": "3065",
+          "name": "정령의 형상"
+        },
+        {
+          "id": "3084",
+          "name": "강철심장"
+        },
+        {
+          "id": "0",
+          "name": null
+        },
+        {
+          "id": "3111",
+          "name": "헤르메스의 발걸음"
+        },
+        {
+          "id": "3742",
+          "name": "망자의 갑옷"
+        },
+        {
+          "id": "0",
+          "name": null
+        },
+        {
+          "id": "3364",
+          "name": "예언자의 렌즈"
+        }
+      ],
+      "level": "16",
+      "magicDamageDealt": "63915",
+      "magicDamageToChampions": "9201",
+      "magicDamageTaken": "11960",
+      "physicalDamageDealt": "99793",
+      "physicalDamageToChampions": "6576",
+      "physicalDamageTaken": "31976",
+      "trueDamageDealt": "90518",
+      "trueDamageToChampions": "118",
+      "trueDamageTaken": "1944",
+      "totalDamageDealt": "254227",
+      "totalDamageToChampions": "15897",
+      "totalDamageTaken": "45881",
+      "creepScore": "205",
+      "visionScore": "57",
+      "controlWardsBought": "6",
+      "wardsKilled": "14",
+      "wardsPlaced": "10",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8000",
+            "name": "정밀"
+          },
+          "keystone": {
+            "id": "8021",
+            "name": "기민한 발놀림"
+          },
+          "slots": [
+            {
+              "id": "9111",
+              "name": "승전보"
+            },
+            {
+              "id": "9104",
+              "name": "전설: 민첩함"
+            },
+            {
+              "id": "8014",
+              "name": "최후의 일격"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8300",
+            "name": "영감"
+          },
+          "slots": [
+            {
+              "id": "8304",
+              "name": "마법의 신발"
+            },
+            {
+              "id": "8410",
+              "name": "쾌속 접근"
+            }
+          ]
+        },
+        "statPerks": [
+          "5005",
+          "5001",
+          "5001"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "11",
+          "name": "강타"
+        },
+        {
+          "id": "4",
+          "name": "점멸"
+        }
+      ],
+      "riotIdGameName": "강진성",
+      "riotIdTagLine": "강진성",
+      "champion": "DrMundo",
+      "team": "BLUE",
+      "position": "JUNGLE",
+      "win": true
+    },
+    {
+      "kills": "2",
+      "deaths": "3",
+      "assists": "14",
+      "doubleKills": "0",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "9117",
+      "items": [
+        {
+          "id": "2055",
+          "name": "제어 와드"
+        },
+        {
+          "id": "3157",
+          "name": "존야의 모래시계"
+        },
+        {
+          "id": "3871",
+          "name": "자자크의 세계가시"
+        },
+        {
+          "id": "0",
+          "name": null
+        },
+        {
+          "id": "6653",
+          "name": "리안드리의 고통"
+        },
+        {
+          "id": "1001",
+          "name": "장화"
+        },
+        {
+          "id": "3364",
+          "name": "예언자의 렌즈"
+        }
+      ],
+      "level": "13",
+      "magicDamageDealt": "25930",
+      "magicDamageToChampions": "13196",
+      "magicDamageTaken": "6148",
+      "physicalDamageDealt": "2905",
+      "physicalDamageToChampions": "1145",
+      "physicalDamageTaken": "8647",
+      "trueDamageDealt": "804",
+      "trueDamageToChampions": "0",
+      "trueDamageTaken": "479",
+      "totalDamageDealt": "29641",
+      "totalDamageToChampions": "14341",
+      "totalDamageTaken": "15275",
+      "creepScore": "26",
+      "visionScore": "90",
+      "controlWardsBought": "7",
+      "wardsKilled": "13",
+      "wardsPlaced": "36",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8200",
+            "name": "마법"
+          },
+          "keystone": {
+            "id": "8229",
+            "name": "신비로운 유성"
+          },
+          "slots": [
+            {
+              "id": "8226",
+              "name": "마나순환 팔찌"
+            },
+            {
+              "id": "8210",
+              "name": "깨달음"
+            },
+            {
+              "id": "8237",
+              "name": "주문 작열"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8300",
+            "name": "영감"
+          },
+          "slots": [
+            {
+              "id": "8345",
+              "name": "비스킷 배달"
+            },
+            {
+              "id": "8321",
+              "name": "환급"
+            }
+          ]
+        },
+        "statPerks": [
+          "5008",
+          "5008",
+          "5001"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "4",
+          "name": "점멸"
+        },
+        {
+          "id": "7",
+          "name": "회복"
+        }
+      ],
+      "riotIdGameName": "twinkle2",
+      "riotIdTagLine": "KR1",
+      "champion": "Morgana",
+      "team": "BLUE",
+      "position": "UTILITY",
+      "win": true
+    },
+    {
+      "kills": "0",
+      "deaths": "5",
+      "assists": "1",
+      "doubleKills": "0",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "11432",
+      "items": [
+        {
+          "id": "1056",
+          "name": "도란의 반지"
+        },
+        {
+          "id": "0",
+          "name": null
+        },
+        {
+          "id": "3118",
+          "name": "악의"
+        },
+        {
+          "id": "6653",
+          "name": "리안드리의 고통"
+        },
+        {
+          "id": "3047",
+          "name": "판금 장화"
+        },
+        {
+          "id": "3115",
+          "name": "내셔의 이빨"
+        },
+        {
+          "id": "3364",
+          "name": "예언자의 렌즈"
+        }
+      ],
+      "level": "16",
+      "magicDamageDealt": "116331",
+      "magicDamageToChampions": "20746",
+      "magicDamageTaken": "5422",
+      "physicalDamageDealt": "31674",
+      "physicalDamageToChampions": "5105",
+      "physicalDamageTaken": "15371",
+      "trueDamageDealt": "3923",
+      "trueDamageToChampions": "2049",
+      "trueDamageTaken": "983",
+      "totalDamageDealt": "151928",
+      "totalDamageToChampions": "27901",
+      "totalDamageTaken": "21777",
+      "creepScore": "236",
+      "visionScore": "20",
+      "controlWardsBought": "2",
+      "wardsKilled": "2",
+      "wardsPlaced": "10",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8000",
+            "name": "정밀"
+          },
+          "keystone": {
+            "id": "8005",
+            "name": "집중 공격"
+          },
+          "slots": [
+            {
+              "id": "9111",
+              "name": "승전보"
+            },
+            {
+              "id": "9104",
+              "name": "전설: 민첩함"
+            },
+            {
+              "id": "8299",
+              "name": "최후의 저항"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8400",
+            "name": "결의"
+          },
+          "slots": [
+            {
+              "id": "8451",
+              "name": "과잉성장"
+            },
+            {
+              "id": "8473",
+              "name": "뼈 방패"
+            }
+          ]
+        },
+        "statPerks": [
+          "5005",
+          "5008",
+          "5001"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "14",
+          "name": "점화"
+        },
+        {
+          "id": "4",
+          "name": "점멸"
+        }
+      ],
+      "riotIdGameName": "티 모",
+      "riotIdTagLine": "12345",
+      "champion": "Teemo",
+      "team": "RED",
+      "position": "TOP",
+      "win": false
+    },
+    {
+      "kills": "0",
+      "deaths": "5",
+      "assists": "4",
+      "doubleKills": "0",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "10941",
+      "items": [
+        {
+          "id": "1055",
+          "name": "도란의 검"
+        },
+        {
+          "id": "3158",
+          "name": "명석함의 아이오니아 장화"
+        },
+        {
+          "id": "3078",
+          "name": "삼위일체"
+        },
+        {
+          "id": "2021",
+          "name": "땅굴 채굴기"
+        },
+        {
+          "id": "1037",
+          "name": "곡괭이"
+        },
+        {
+          "id": "3042",
+          "name": "무라마나"
+        },
+        {
+          "id": "3363",
+          "name": "망원형 개조"
+        }
+      ],
+      "level": "14",
+      "magicDamageDealt": "10844",
+      "magicDamageToChampions": "6439",
+      "magicDamageTaken": "12033",
+      "physicalDamageDealt": "137586",
+      "physicalDamageToChampions": "14234",
+      "physicalDamageTaken": "13371",
+      "trueDamageDealt": "5811",
+      "trueDamageToChampions": "132",
+      "trueDamageTaken": "704",
+      "totalDamageDealt": "154241",
+      "totalDamageToChampions": "20805",
+      "totalDamageTaken": "26109",
+      "creepScore": "258",
+      "visionScore": "12",
+      "controlWardsBought": "2",
+      "wardsKilled": "2",
+      "wardsPlaced": "8",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8000",
+            "name": "정밀"
+          },
+          "keystone": {
+            "id": "8010",
+            "name": "정복자"
+          },
+          "slots": [
+            {
+              "id": "8009",
+              "name": "침착"
+            },
+            {
+              "id": "9103",
+              "name": "전설: 핏빛 길"
+            },
+            {
+              "id": "8014",
+              "name": "최후의 일격"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8300",
+            "name": "영감"
+          },
+          "slots": [
+            {
+              "id": "8345",
+              "name": "비스킷 배달"
+            },
+            {
+              "id": "8304",
+              "name": "마법의 신발"
+            }
+          ]
+        },
+        "statPerks": [
+          "5005",
+          "5008",
+          "5001"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "21",
+          "name": "방어막"
+        },
+        {
+          "id": "4",
+          "name": "점멸"
+        }
+      ],
+      "riotIdGameName": "난 지금도 강해지고 있다",
+      "riotIdTagLine": "KR132",
+      "champion": "Ezreal",
+      "team": "RED",
+      "position": "BOTTOM",
+      "win": false
+    },
+    {
+      "kills": "0",
+      "deaths": "5",
+      "assists": "1",
+      "doubleKills": "0",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "9269",
+      "items": [
+        {
+          "id": "1056",
+          "name": "도란의 반지"
+        },
+        {
+          "id": "3158",
+          "name": "명석함의 아이오니아 장화"
+        },
+        {
+          "id": "2055",
+          "name": "제어 와드"
+        },
+        {
+          "id": "3040",
+          "name": "대천사의 포옹"
+        },
+        {
+          "id": "3147",
+          "name": "기괴한 가면"
+        },
+        {
+          "id": "6657",
+          "name": "영겁의 지팡이"
+        },
+        {
+          "id": "3364",
+          "name": "예언자의 렌즈"
+        }
+      ],
+      "level": "15",
+      "magicDamageDealt": "94839",
+      "magicDamageToChampions": "8094",
+      "magicDamageTaken": "16878",
+      "physicalDamageDealt": "13033",
+      "physicalDamageToChampions": "493",
+      "physicalDamageTaken": "14518",
+      "trueDamageDealt": "700",
+      "trueDamageToChampions": "586",
+      "trueDamageTaken": "787",
+      "totalDamageDealt": "108573",
+      "totalDamageToChampions": "9174",
+      "totalDamageTaken": "32183",
+      "creepScore": "215",
+      "visionScore": "29",
+      "controlWardsBought": "5",
+      "wardsKilled": "10",
+      "wardsPlaced": "11",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8100",
+            "name": "지배"
+          },
+          "keystone": {
+            "id": "8112",
+            "name": "감전"
+          },
+          "slots": [
+            {
+              "id": "8126",
+              "name": "비열한 한 방"
+            },
+            {
+              "id": "8137",
+              "name": "육감"
+            },
+            {
+              "id": "8105",
+              "name": "끈질긴 사냥꾼"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8000",
+            "name": "정밀"
+          },
+          "slots": [
+            {
+              "id": "8009",
+              "name": "침착"
+            },
+            {
+              "id": "8014",
+              "name": "최후의 일격"
+            }
+          ]
+        },
+        "statPerks": [
+          "5005",
+          "5008",
+          "5001"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "4",
+          "name": "점멸"
+        },
+        {
+          "id": "12",
+          "name": "순간이동"
+        }
+      ],
+      "riotIdGameName": "수달촌장",
+      "riotIdTagLine": "KR1",
+      "champion": "Anivia",
+      "team": "RED",
+      "position": "MIDDLE",
+      "win": false
+    },
+    {
+      "kills": "2",
+      "deaths": "7",
+      "assists": "1",
+      "doubleKills": "0",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "7290",
+      "items": [
+        {
+          "id": "2055",
+          "name": "제어 와드"
+        },
+        {
+          "id": "3107",
+          "name": "구원"
+        },
+        {
+          "id": "3190",
+          "name": "강철의 솔라리 펜던트"
+        },
+        {
+          "id": "3869",
+          "name": "천상의 이의"
+        },
+        {
+          "id": "3067",
+          "name": "점화석"
+        },
+        {
+          "id": "3009",
+          "name": "신속의 장화"
+        },
+        {
+          "id": "3364",
+          "name": "예언자의 렌즈"
+        }
+      ],
+      "level": "11",
+      "magicDamageDealt": "22704",
+      "magicDamageToChampions": "5155",
+      "magicDamageTaken": "13250",
+      "physicalDamageDealt": "4005",
+      "physicalDamageToChampions": "1029",
+      "physicalDamageTaken": "12241",
+      "trueDamageDealt": "3131",
+      "trueDamageToChampions": "1631",
+      "trueDamageTaken": "625",
+      "totalDamageDealt": "29841",
+      "totalDamageToChampions": "7816",
+      "totalDamageTaken": "26116",
+      "creepScore": "40",
+      "visionScore": "81",
+      "controlWardsBought": "9",
+      "wardsKilled": "11",
+      "wardsPlaced": "36",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8300",
+            "name": "영감"
+          },
+          "keystone": {
+            "id": "8360",
+            "name": "봉인 풀린 주문서"
+          },
+          "slots": [
+            {
+              "id": "8304",
+              "name": "마법의 신발"
+            },
+            {
+              "id": "8345",
+              "name": "비스킷 배달"
+            },
+            {
+              "id": "8347",
+              "name": "우주적 통찰력"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8400",
+            "name": "결의"
+          },
+          "slots": [
+            {
+              "id": "8473",
+              "name": "뼈 방패"
+            },
+            {
+              "id": "8242",
+              "name": "불굴의 의지"
+            }
+          ]
+        },
+        "statPerks": [
+          "5007",
+          "5010",
+          "5011"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "4",
+          "name": "점멸"
+        },
+        {
+          "id": "14",
+          "name": "점화"
+        }
+      ],
+      "riotIdGameName": "Rebirth the Edge",
+      "riotIdTagLine": "KR1",
+      "champion": "Maokai",
+      "team": "RED",
+      "position": "UTILITY",
+      "win": false
+    },
+    {
+      "kills": "5",
+      "deaths": "6",
+      "assists": "1",
+      "doubleKills": "0",
+      "tripleKills": "0",
+      "quadraKills": "0",
+      "pentaKills": "0",
+      "goldEarned": "10501",
+      "items": [
+        {
+          "id": "2019",
+          "name": "강철 인장"
+        },
+        {
+          "id": "0",
+          "name": null
+        },
+        {
+          "id": "0",
+          "name": null
+        },
+        {
+          "id": "3161",
+          "name": "쇼진의 창"
+        },
+        {
+          "id": "3111",
+          "name": "헤르메스의 발걸음"
+        },
+        {
+          "id": "3071",
+          "name": "칠흑의 양날 도끼"
+        },
+        {
+          "id": "3363",
+          "name": "망원형 개조"
+        }
+      ],
+      "level": "14",
+      "magicDamageDealt": "13931",
+      "magicDamageToChampions": "1781",
+      "magicDamageTaken": "15269",
+      "physicalDamageDealt": "142389",
+      "physicalDamageToChampions": "9702",
+      "physicalDamageTaken": "29460",
+      "trueDamageDealt": "71272",
+      "trueDamageToChampions": "474",
+      "trueDamageTaken": "480",
+      "totalDamageDealt": "227593",
+      "totalDamageToChampions": "11957",
+      "totalDamageTaken": "45210",
+      "creepScore": "160",
+      "visionScore": "27",
+      "controlWardsBought": "6",
+      "wardsKilled": "3",
+      "wardsPlaced": "13",
+      "perks": {
+        "primaryStyle": {
+          "style": {
+            "id": "8200",
+            "name": "마법"
+          },
+          "keystone": {
+            "id": "8230",
+            "name": "난입"
+          },
+          "slots": [
+            {
+              "id": "8275",
+              "name": "빛의 망토"
+            },
+            {
+              "id": "8234",
+              "name": "기민함"
+            },
+            {
+              "id": "8232",
+              "name": "물 위를 걷는 자"
+            }
+          ]
+        },
+        "subStyle": {
+          "style": {
+            "id": "8000",
+            "name": "정밀"
+          },
+          "slots": [
+            {
+              "id": "9105",
+              "name": "전설: 가속"
+            },
+            {
+              "id": "9111",
+              "name": "승전보"
+            }
+          ]
+        },
+        "statPerks": [
+          "5008",
+          "5008",
+          "5001"
+        ]
+      },
+      "summonerSpells": [
+        {
+          "id": "11",
+          "name": "강타"
+        },
+        {
+          "id": "6",
+          "name": "유체화"
+        }
+      ],
+      "riotIdGameName": "제천아낙네",
+      "riotIdTagLine": "KR1",
+      "champion": "Hecarim",
+      "team": "RED",
+      "position": "JUNGLE",
+      "win": false
+    }
+  ]
+}

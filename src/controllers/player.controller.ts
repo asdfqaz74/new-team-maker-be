@@ -42,7 +42,7 @@ export const verify = async (req: Request, res: Response): Promise<void> => {
 /*                      기타                      */
 /* -------------------------------------------- */
 // 콤보박스에 들어갈 라인 정보 조회 컨트롤러
-export const getLine = async (res: Response): Promise<void> => {
+export const getLine = async (req: Request, res: Response): Promise<void> => {
   try {
     const lineOptions = getLineOptions();
 

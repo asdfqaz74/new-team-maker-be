@@ -3,7 +3,7 @@ import {
   validateEmail,
   validatePassword,
   validateUserId,
-} from "@utils/validateRegister";
+} from "utils/validateRegister";
 
 // Service에서 사용할 타입 (passwordConfirm 제외)
 export interface RegisterUserData {
