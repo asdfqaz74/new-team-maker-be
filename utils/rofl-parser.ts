@@ -26,7 +26,7 @@ export interface GameMetadata {
   gameLength: number; // 밀리초 단위
   gameDuration: number; // 초 단위로 변환
   winTeam: "BLUE" | "RED";
-  playTime: number; // 초 단위
+  playTime: string; // "MM:SS" 형식
 }
 
 export interface RawPlayerStats {
@@ -320,9 +320,13 @@ const transformMetadata = (
   const winTeam = winner ? convertTeam(winner.TEAM) : "BLUE";
 
   // playTime은 첫 번째 플레이어의 TIME_PLAYED 사용
-  const playTime = rawStats?.[0]?.TIME_PLAYED
+  const rawPlayTime = rawStats?.[0]?.TIME_PLAYED
     ? parseInt(rawStats[0].TIME_PLAYED, 10)
     : 0;
+
+  const computedPlayTimeMinutes = Math.floor(rawPlayTime / 60);
+  const computedPlayTimeSeconds = rawPlayTime % 60;
+  const playTime = `${computedPlayTimeMinutes}-${computedPlayTimeSeconds}`;
 
   return {
     gameLength: raw.gameLength,

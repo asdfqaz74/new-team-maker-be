@@ -37,6 +37,7 @@ const playerSchema = new Schema<IPlayer>(
       ref: "User",
       required: true,
     },
+    // 최근 10게임 통계
     recentStats: {
       games: { type: Number, default: 0 },
       wins: { type: Number, default: 0 },
@@ -47,6 +48,8 @@ const playerSchema = new Schema<IPlayer>(
       assists: { type: Number, default: 0 },
       kdaAvg: { type: Number, default: 0 },
     },
+
+    // 모스트챔피언
   },
   { timestamps: true }
 );
