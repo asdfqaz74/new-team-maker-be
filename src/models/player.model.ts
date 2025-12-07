@@ -15,9 +15,10 @@ export interface IPlayer extends Document {
   realName: string;
   gameName: string;
   tagLine: string;
+  puuid: string;
   mainPosition: string;
-  subPositions: string;
-  subPositions2: string;
+  subPosition: string;
+  subPosition2: string;
   owner: mongoose.Types.ObjectId;
   recentStats: IRecentStats;
   createdAt: Date;
@@ -29,9 +30,10 @@ const playerSchema = new Schema<IPlayer>(
     realName: { type: String, required: true },
     gameName: { type: String, required: true },
     tagLine: { type: String, required: true },
+    puuid: { type: String, required: true, unique: true },
     mainPosition: { type: String, required: true },
-    subPositions: { type: String, required: true },
-    subPositions2: { type: String },
+    subPosition: { type: String, required: true },
+    subPosition2: { type: String },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
