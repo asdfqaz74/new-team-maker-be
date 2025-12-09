@@ -125,6 +125,7 @@ export interface IMatch extends Document {
   playedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
+  banChampions: mongoose.Types.ObjectId[]; // Champion 모델 참조
 }
 
 // 스키마 정의
@@ -279,6 +280,7 @@ const matchSchema = new Schema<IMatch>(
   {
     metadata: { type: matchMetadataSchema, required: true },
     playedAt: { type: Date },
+    banChampions: [{ type: Schema.Types.ObjectId, ref: "Champion" }],
   },
   { timestamps: true }
 );

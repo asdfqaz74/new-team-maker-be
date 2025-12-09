@@ -118,6 +118,13 @@ export interface PlayerMappingDTO {
   playerId: string; // 선택된 Player의 _id
 }
 
+// 저장 요청용 - 밴 챔피언
+export interface BanChampionDTO {
+  championId: string;
+  name: string;
+  _id: string;
+}
+
 // 저장 요청
 export interface SaveMatchRequestDTO {
   metadata: MatchMetadataDTO;
@@ -125,4 +132,5 @@ export interface SaveMatchRequestDTO {
   redTeam: PlayerFullDTO[];
   playerMappings: PlayerMappingDTO[];
   playedAt?: string;
+  banChampions: BanChampionDTO[];
 }

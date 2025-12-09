@@ -222,7 +222,7 @@ const ChampionSchema = new Schema<IChampion>(
 
 // 인덱스 추가
 ChampionSchema.index({ name: 1 });
-ChampionSchema.index({ tags: 1 });
+ChampionSchema.index({ championId: 1 });
 
 const Champion: Model<IChampion> = mongoose.model<IChampion>(
   "Champion",

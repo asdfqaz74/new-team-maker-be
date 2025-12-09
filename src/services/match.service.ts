@@ -1,7 +1,6 @@
 import {
   parseRoflFile,
   PlayerStats as ParsedPlayerStats,
-  ParsedRoflData,
 } from "../../utils/rofl-parser";
 import {
   MatchPreviewResponseDTO,
@@ -117,9 +116,14 @@ export const parseAndPreview = (filePath: string): MatchPreviewResponseDTO => {
  */
 export const saveMatch = async (data: SaveMatchRequestDTO) => {
   // 1. Match 저장
+  // banChampions에서 _id만 추출하여 ObjectId 배열로 변환
+  const banChampionIds =
+    data.banChampions?.map((ban) => new mongoose.Types.ObjectId(ban._id)) || [];
+
   const match = await Match.create({
     metadata: data.metadata,
     playedAt: data.playedAt ? new Date(data.playedAt) : new Date(),
+    banChampions: banChampionIds,
   });
 
   // 2. 모든 playerId로 Player 정보 조회
