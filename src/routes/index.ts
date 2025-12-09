@@ -3,6 +3,7 @@ import userRoutes from "./user.routes";
 import playerRoutes from "./player.routes";
 import matchRoutes from "./match.routes";
 import championRoutes from "./champion.routes";
+import staticRoutes from "./static.routes";
 
 const router: Router = Router();
 
@@ -19,5 +20,6 @@ router.use("/users", userRoutes);
 router.use("/players", playerRoutes);
 router.use("/matches", matchRoutes);
 router.use("/champions", championRoutes);
+router.use("/statics", staticRoutes);
 
 export default router;
