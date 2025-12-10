@@ -287,7 +287,7 @@ const matchSchema = new Schema<IMatch>(
 
 // 인덱스 설정
 playerStatsSchema.index({ matchId: 1 });
-playerStatsSchema.index({ riotIdGameName: 1, riotIdTagLine: 1 });
+playerStatsSchema.index({ playerId: 1 });
 playerStatsSchema.index({ champion: 1 });
 playerStatsSchema.index({ team: 1, position: 1 });
 

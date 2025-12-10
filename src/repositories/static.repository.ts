@@ -46,9 +46,7 @@ export const getHighestWinRateChampionsByPosition = async (
   })
     .sort({ [winRateField]: -1 })
     .limit(5)
-    .select(
-      `championName championId byPosition.${position} ${gamesField} ${winRateField}`
-    );
+    .select(`championName championId byPosition.${position}`);
 
   return champions;
 };

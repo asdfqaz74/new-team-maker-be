@@ -13,7 +13,7 @@ export const getChampionsSimpleList = async (
 
     res.status(200).json({
       success: true,
-      data: { championList },
+      data: { totalCount: championList.length, championList },
       message: "챔피언 목록을 성공적으로 조회했습니다.",
     });
   } catch (error) {

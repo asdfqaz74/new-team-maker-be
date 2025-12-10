@@ -61,12 +61,10 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     }
 
     if (!gameName || !tagLine) {
-      res
-        .status(400)
-        .json({
-          success: false,
-          message: "닉네임과 태그라인을 모두 입력해주세요.",
-        });
+      res.status(400).json({
+        success: false,
+        message: "닉네임과 태그라인을 모두 입력해주세요.",
+      });
       return;
     }
 
@@ -95,12 +93,10 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       owner: userId,
     });
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "해당 플레이어를 성공적으로 등록했습니다.",
-      });
+    res.status(200).json({
+      success: true,
+      message: "해당 플레이어를 성공적으로 등록했습니다.",
+    });
   } catch (error) {
     if ((error as any).code === 11000) {
       res
@@ -205,6 +201,7 @@ export const getPlayersList = async (
       success: true,
       message: "해당 유저의 플레이어 목록을 성공적으로 조회했습니다.",
       data: {
+        totalCount: list.length,
         list,
       },
     });
