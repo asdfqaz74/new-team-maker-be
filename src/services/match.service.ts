@@ -17,6 +17,7 @@ import {
 } from "../models/static.model";
 import Champion from "../models/champion.model";
 import mongoose from "mongoose";
+import { getPlayerRecentStats } from "@/repositories/match.repository";
 
 // ============================================
 // 타입 정의
@@ -521,4 +522,32 @@ const updatePlayerRankStats = async (
       { $set: { winRate: calcWinRate(rankStats.wins, rankStats.totalGames) } }
     );
   }
+};
+
+/* -------------------------------------------- */
+/*                 플레이어 최근 매치 조회                */
+/* -------------------------------------------- */
+
+const DEFAULT_PAGE_SIZE = 5;
+
+export const getRecentMatchesByPlayer = async (
+  playerId: string,
+  pageIndex: number = 1,
+  pageSize: number = DEFAULT_PAGE_SIZE
+) => {
+  const { data, totalCount } = await getPlayerRecentStats({
+    playerId,
+    pageIndex,
+    pageSize,
+  });
+
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  return {
+    totalCount,
+    totalPages,
+    pageIndex,
+    pageSize,
+    matches: data,
+  };
 };

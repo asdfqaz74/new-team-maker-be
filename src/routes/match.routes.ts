@@ -13,4 +13,7 @@ router.post("/save", matchController.save);
 // 매치 삭제
 router.delete("/delete/:matchId", matchController.remove);
 
+// 플레이어 최근 매치 조회
+router.get("/recent/:playerId", matchController.getRecentMatches);
+
 export default router;

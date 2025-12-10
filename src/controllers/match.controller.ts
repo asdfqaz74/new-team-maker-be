@@ -4,6 +4,7 @@ import {
   parseAndPreview,
   saveMatch,
   deleteMatch,
+  getRecentMatchesByPlayer,
 } from "../services/match.service";
 import { SaveMatchRequestDTO } from "../dto/match.dto";
 
@@ -116,6 +117,48 @@ export const remove = async (req: Request, res: Response): Promise<void> => {
       error: {
         code: "DELETE_ERROR",
         message: (error as Error).message || "매치 삭제 중 오류 발생",
+      },
+    });
+  }
+};
+
+// 플레이어 최근 매치 조회
+export const getRecentMatches = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { playerId } = req.params;
+    const pageIndex = parseInt(req.query.page as string) || 1;
+    const pageSize = parseInt(req.query.pageSize as string) || 5;
+
+    if (!playerId) {
+      res.status(400).json({
+        success: false,
+        error: { code: "INVALID_ID", message: "플레이어 ID가 필요합니다." },
+      });
+      return;
+    }
+
+    const result = await getRecentMatchesByPlayer(
+      playerId,
+      pageIndex,
+      pageSize
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "플레이어의 최근 매치 조회에 성공했습니다.",
+      data: result,
+    });
+  } catch (error) {
+    console.error("플레이어 최근 매치 조회 오류:", error);
+    res.status(500).json({
+      success: false,
+      error: {
+        code: "RETRIEVE_ERROR",
+        message:
+          (error as Error).message || "플레이어 최근 매치 조회 중 오류 발생",
       },
     });
   }
