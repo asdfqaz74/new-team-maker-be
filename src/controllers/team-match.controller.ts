@@ -60,8 +60,10 @@ export const getPlayersData = async (
 
 /**
  * AI 팀 매칭 생성
+ *
  * POST /api/team-match/generate
- * Body: { playerIds: string[] }
+ *
+ * Body: { playerIds: string[], positionCheck: boolean, requirements?: string }
  */
 export const generateMatching = async (
   req: Request,

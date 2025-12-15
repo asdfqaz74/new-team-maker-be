@@ -36,7 +36,7 @@ export const getPlayersForMatching = async (
 /** AI를 이용한 팀 매칭 */
 export const generateTeamMatching = async (
   players: PlayerForMatchingDTO[],
-  positionCheck: boolean = true
+  positionCheck: boolean
 ): Promise<TeamMatchResponseDTO> => {
   if (players.length !== 10) {
     throw new Error("팀 매칭을 위해서는 정확히 10명의 플레이어가 필요합니다.");
@@ -52,13 +52,15 @@ export const generateTeamMatching = async (
         content: `당신은 리그오브레전드 5대5 팀 매칭 전문가입니다.
 주어진 10명의 플레이어 정보를 바탕으로 공정하고 균형 잡힌 팀을 구성합니다.
 
-규칙:
-1. 각 팀은 5명으로 구성됩니다.
-2. 각 팀에는 TOP, JUNGLE, MIDDLE, BOTTOM, UTILITY 포지션이 하나씩 있어야 합니다.
-3. 플레이어의 주 포지션(mainPosition)을 우선 배정하고, 불가능하면 부 포지션(subPosition, subPosition2)을 고려합니다.
-3-1. 만약 positionCheck가 false 로 설정되어 있다면, 포지션 제약 없이 팀을 구성할 수 있습니다.
-4. 양 팀의 평균 승률이 비슷하도록 균형을 맞춥니다.
-5. 반드시 3가지 다른 팀 구성을 제안합니다.
+**중요 규칙:**
+1. 각 팀은 정확히 5명으로 구성됩니다.
+2. **절대로 같은 플레이어를 중복 배치하면 안 됩니다. 각 플레이어는 블루팀 또는 레드팀 중 한 곳에만 배치되어야 합니다.**
+3. 10명의 플레이어를 5명씩 두 팀으로 나눕니다. 모든 플레이어가 반드시 한 번씩만 배치되어야 합니다.
+4. 각 팀에는 TOP, JUNGLE, MIDDLE, BOTTOM, UTILITY 포지션이 하나씩 있어야 합니다.
+5. 플레이어의 주 포지션(mainPosition)을 우선 배정하고, 불가능하면 부 포지션(subPosition, subPosition2)을 고려합니다.
+5-1. 만약 positionCheck가 false로 설정되어 있다면, 포지션 제약 없이 팀을 구성할 수 있습니다.
+6. 양 팀의 평균 승률이 비슷하도록 균형을 맞춥니다.
+7. 반드시 3가지 다른 팀 구성을 제안합니다.
 
 응답은 반드시 아래 JSON 형식으로만 출력하세요. 다른 텍스트는 포함하지 마세요.`,
       },
@@ -77,7 +79,28 @@ export const generateTeamMatching = async (
   }
 
   const parsed = JSON.parse(content);
+
+  // 중복 플레이어 검증
+  validateNoPlayerDuplicates(parsed);
+
   return transformAIResponse(parsed, players, positionCheck);
+};
+
+/** 플레이어 중복 검증 */
+const validateNoPlayerDuplicates = (aiResponse: any) => {
+  for (const proposal of aiResponse.proposals) {
+    const allPlayerIds = [
+      ...proposal.blueTeam.map((p: any) => p.playerId),
+      ...proposal.redTeam.map((p: any) => p.playerId),
+    ];
+
+    const uniqueIds = new Set(allPlayerIds);
+    if (uniqueIds.size !== 10) {
+      throw new Error(
+        "AI가 중복된 플레이어를 배치했습니다. 다시 시도해주세요."
+      );
+    }
+  }
 };
 
 // ============================================
@@ -87,7 +110,7 @@ export const generateTeamMatching = async (
 /** AI에게 보낼 프롬프트 생성 */
 const buildPrompt = (
   players: PlayerForMatchingDTO[],
-  positionCheck: boolean = true
+  positionCheck: boolean
 ): string => {
   const playerList = players
     .map(
@@ -102,7 +125,7 @@ const buildPrompt = (
     )
     .join("\n");
 
-  return `다음 10명의 플레이어로 균형 잡힌 5대5 팀을 3가지 구성해주세요.
+  return `다음 10명의 플레이어로 균형 잡힌 5대5 팀을 3가지 구성해주세요. 플레이어는 중복되어서는 안됩니다.
 
 플레이어 목록:
 ${playerList}
@@ -129,7 +152,9 @@ positionCheck 가 true 인 경우:
         { "playerId": "...", "recommendPosition": "UTILITY" }
       ],
       "balanceScore": 85,
-      "description": "이 구성의 특징 설명..."
+      "description": "이 구성의 특징 설명...",
+      "predictedWinner": "BLUE",
+      "predictedWinRate": 55
     }
   ]
 }
@@ -154,6 +179,8 @@ positionCheck 가 false 인 경우:
         ],
         "balanceScore": 90,
         "description": "이 구성의 특징 설명..."
+        "predictedWinner": "BLUE" // 또는 "RED"
+        "predictedWinRate": 75 // 승리 확률 (%)
     }
   ]
 }
@@ -181,7 +208,7 @@ const transformAIResponse = (
           gameName: player?.gameName || "",
           tagLine: player?.tagLine || "",
           realName: player?.realName,
-          assignedPosition: p.assignedPosition,
+          assignedPosition: p.recommendPosition || null, // AI는 recommendPosition으로 응답
           recentWinRate: player?.recentWinRate || 0,
         };
       }),
@@ -192,13 +219,15 @@ const transformAIResponse = (
           gameName: player?.gameName || "",
           tagLine: player?.tagLine || "",
           realName: player?.realName,
-          assignedPosition: p.assignedPosition,
+          assignedPosition: p.recommendPosition || null, // AI는 recommendPosition으로 응답
           recentWinRate: player?.recentWinRate || 0,
         };
       }),
       balanceScore: proposal.balanceScore,
       description: proposal.description,
       positionCheck,
+      predictedWinner: proposal.predictedWinner,
+      predictedWinRate: proposal.predictedWinRate,
     })
   );
 
