@@ -129,7 +129,7 @@ export const getRecentMatches = async (
 ): Promise<void> => {
   try {
     const { playerId } = req.params;
-    const pageIndex = parseInt(req.query.page as string) || 1;
+    const pageIndex = parseInt(req.query.pageIndex as string) || 1;
     const pageSize = parseInt(req.query.pageSize as string) || 5;
 
     if (!playerId) {
