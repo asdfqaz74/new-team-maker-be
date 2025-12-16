@@ -78,3 +78,41 @@ export const authMiddleware = (
     });
   }
 };
+
+/**
+ * 옵셔널 인증 미들웨어
+ * - 토큰이 있으면 검증하고 req.user 설정
+ * - 토큰이 없거나 유효하지 않아도 에러 없이 통과 (req.user = undefined)
+ * - 비로그인/로그인 모두 접근 가능한 API에 사용
+ */
+export const optionalAuthMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  try {
+    const accessToken = req.cookies.accessToken;
+
+    if (!accessToken) {
+      // 토큰 없으면 그냥 통과 (비로그인 상태)
+      next();
+      return;
+    }
+
+    // 토큰 검증
+    const decoded = jwt.verify(
+      accessToken,
+      process.env.JWT_SECRET || "secret"
+    ) as TokenPayload;
+
+    // req.user에 사용자 정보 저장
+    req.user = {
+      id: decoded.id,
+    };
+
+    next();
+  } catch (error) {
+    // 토큰이 유효하지 않아도 그냥 통과 (비로그인 취급)
+    next();
+  }
+};
