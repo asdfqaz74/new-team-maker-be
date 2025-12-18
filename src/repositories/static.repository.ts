@@ -24,7 +24,9 @@ export const getHighestBanRateChampion = async () => {
   const champions = await ChampionStats.find()
     .sort({ banRate: -1 })
     .limit(10)
-    .select("championName championId totalGames pickRate winRate");
+    .select(
+      "championName championId totalGames pickRate winRate banRate banCount"
+    );
   return champions;
 };
 

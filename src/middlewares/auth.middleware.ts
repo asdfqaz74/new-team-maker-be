@@ -1,12 +1,16 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
+// 사용자 역할 타입
+export type UserRole = "owner" | "viewer";
+
 // Request 타입 확장
 declare global {
   namespace Express {
     interface Request {
       user?: {
         id: string;
+        role: UserRole;
       };
     }
   }
@@ -14,6 +18,7 @@ declare global {
 
 interface TokenPayload {
   id: string;
+  role: UserRole;
   iat: number;
   exp: number;
 }
@@ -52,6 +57,7 @@ export const authMiddleware = (
     // req.user에 사용자 정보 저장
     req.user = {
       id: decoded.id,
+      role: decoded.role || "owner",
     };
 
     next();
@@ -108,6 +114,7 @@ export const optionalAuthMiddleware = (
     // req.user에 사용자 정보 저장
     req.user = {
       id: decoded.id,
+      role: decoded.role || "owner",
     };
 
     next();
@@ -115,4 +122,40 @@ export const optionalAuthMiddleware = (
     // 토큰이 유효하지 않아도 그냥 통과 (비로그인 취급)
     next();
   }
+};
+
+/**
+ * Owner 전용 미들웨어
+ * - role이 "owner"인 경우에만 접근 허용
+ * - 서브 계정(viewer)은 접근 불가
+ * - 설정, 수정, 삭제 등의 API에 사용
+ */
+export const ownerOnly = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  if (!req.user) {
+    res.status(401).json({
+      success: false,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "인증이 필요합니다.",
+      },
+    });
+    return;
+  }
+
+  if (req.user.role !== "owner") {
+    res.status(403).json({
+      success: false,
+      error: {
+        code: "FORBIDDEN",
+        message: "권한이 없습니다. 메인 계정으로 로그인해주세요.",
+      },
+    });
+    return;
+  }
+
+  next();
 };

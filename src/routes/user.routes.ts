@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as userController from "@/controllers/user.controller";
-import { authMiddleware } from "@/middlewares/auth.middleware";
+import { authMiddleware, ownerOnly } from "@/middlewares/auth.middleware";
 
 const router: Router = Router();
 
@@ -25,5 +25,21 @@ router.get("/me", authMiddleware, userController.getMe);
 // PUT /api/users/:userId
 // 사용자 정보 수정 (인증 필요)
 router.put("/:userId", userController.updateUser);
+
+// POST /api/users/sub-account - 서브 계정 생성 (owner만 가능)
+router.post(
+  "/sub-account",
+  authMiddleware,
+  ownerOnly,
+  userController.createSubAccount
+);
+
+// DELETE /api/users/sub-account - 서브 계정 삭제 (owner만 가능)
+router.delete(
+  "/sub-account",
+  authMiddleware,
+  ownerOnly,
+  userController.deleteSubAccount
+);
 
 export default router;

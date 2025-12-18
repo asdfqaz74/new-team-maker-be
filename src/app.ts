@@ -18,7 +18,7 @@ import routes from "@/routes";
 connectDB();
 
 const app: Application = express();
-const PORT: number = Number(process.env.PORT) || 3000;
+const PORT: number = Number(process.env.PORT) || 3001;
 
 // Middleware
 app.use(

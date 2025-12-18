@@ -13,11 +13,11 @@ export const register = async (
     dto.sanitize();
     dto.validate();
 
-    const newUser = await userService.registerUser(dto.toServiceData());
+    await userService.registerUser(dto.toServiceData());
 
     res.status(201).json({
       success: true,
-      data: newUser,
+      message: "회원가입에 성공했습니다.",
     });
   } catch (error) {
     if (error instanceof ServiceError) {
@@ -60,6 +60,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     res.status(200).json({
       success: true,
+      message: "로그인에 성공했습니다.",
       data: {
         user,
       },
@@ -192,7 +193,7 @@ export const getMe = async (req: Request, res: Response): Promise<void> => {
     const userId = req.user?.id;
 
     if (!userId) {
-      res.status(401).json({
+      res.status(403).json({
         success: false,
         error: {
           code: "UNAUTHORIZED",
@@ -206,6 +207,104 @@ export const getMe = async (req: Request, res: Response): Promise<void> => {
 
     res.status(200).json({
       success: true,
+      message: "현재 로그인한 유저 정보입니다.",
+      data: { user },
+    });
+  } catch (error) {
+    if (error instanceof ServiceError) {
+      res.status(error.statusCode).json(error.toJSON());
+      return;
+    }
+    res.status(500).json({
+      success: false,
+      error: {
+        code: "INTERNAL_SERVER_ERROR",
+        message: (error as Error).message,
+      },
+    });
+  }
+};
+
+/* -------------------------------------------- */
+/*                서브 계정 생성                     */
+/* -------------------------------------------- */
+export const createSubAccount = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      res.status(401).json({
+        success: false,
+        error: {
+          code: "UNAUTHORIZED",
+          message: "인증이 필요합니다.",
+        },
+      });
+      return;
+    }
+
+    const { subId, password } = req.body;
+
+    if (!subId || !password) {
+      res.status(400).json({
+        success: false,
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "서브 계정 아이디와 비밀번호를 입력해주세요.",
+        },
+      });
+      return;
+    }
+
+    const user = await userService.createSubAccount(userId, subId, password);
+
+    res.status(201).json({
+      success: true,
+      message: "서브 계정이 생성되었습니다.",
+      data: { user },
+    });
+  } catch (error) {
+    if (error instanceof ServiceError) {
+      res.status(error.statusCode).json(error.toJSON());
+      return;
+    }
+    res.status(500).json({
+      success: false,
+      error: {
+        code: "INTERNAL_SERVER_ERROR",
+        message: (error as Error).message,
+      },
+    });
+  }
+};
+
+/* -------------------------------------------- */
+/*                서브 계정 삭제                     */
+/* -------------------------------------------- */
+export const deleteSubAccount = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      res.status(401).json({
+        success: false,
+        error: {
+          code: "UNAUTHORIZED",
+          message: "인증이 필요합니다.",
+        },
+      });
+      return;
+    }
+
+    const user = await userService.deleteSubAccount(userId);
+
+    res.status(200).json({
+      success: true,
+      message: "서브 계정이 삭제되었습니다.",
       data: { user },
     });
   } catch (error) {

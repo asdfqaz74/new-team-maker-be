@@ -14,6 +14,11 @@ export const ErrorCode = {
   // 유저 관련
   USER_NOT_FOUND: "USER_NOT_FOUND",
 
+  // 서브 계정 관련
+  SUB_ACCOUNT_ALREADY_EXISTS: "SUB_ACCOUNT_ALREADY_EXISTS",
+  SUB_ACCOUNT_ID_ALREADY_EXISTS: "SUB_ACCOUNT_ID_ALREADY_EXISTS",
+  SUB_ACCOUNT_NOT_FOUND: "SUB_ACCOUNT_NOT_FOUND",
+
   // 공통
   INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
   VALIDATION_ERROR: "VALIDATION_ERROR",
@@ -35,6 +40,9 @@ export const ErrorMessages: Record<ErrorCodeType, string> = {
   INVALID_REFRESH_TOKEN: "유효하지 않은 리프레시 토큰입니다.",
   UNAUTHORIZED: "인증이 필요합니다.",
   USER_NOT_FOUND: "존재하지 않는 유저입니다.",
+  SUB_ACCOUNT_ALREADY_EXISTS: "이미 서브 계정이 존재합니다.",
+  SUB_ACCOUNT_ID_ALREADY_EXISTS: "이미 사용 중인 서브 계정 아이디입니다.",
+  SUB_ACCOUNT_NOT_FOUND: "서브 계정이 존재하지 않습니다.",
   INTERNAL_SERVER_ERROR: "서버 내부 오류가 발생했습니다.",
   VALIDATION_ERROR: "입력값 검증에 실패했습니다.",
 };
