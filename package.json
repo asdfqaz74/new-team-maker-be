@@ -8,7 +8,8 @@
     "dev": "cross-env NODE_ENV=development nodemon --exec ts-node -r tsconfig-paths/register src/app.ts",
     "build": "tsc && tsc-alias",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy:dev": "rm -rf dist && git pull origin main && npm install && npm run build && pm2 delete all && NODE_ENV=development pm2 start dist/src/app.js --name team-maker"
+    "deploy": "rm -rf dist && git pull origin main && npm install && npm run build && (pm2 delete all || true) && NODE_ENV=production pm2 start dist/src/app.js --name team-maker-be",
+    "deploy:dev": "rm -rf dist && git pull origin main && npm install && npm run build && (pm2 delete all || true) && NODE_ENV=development pm2 start dist/src/app.js --name team-maker-be"
   },
   "keywords": [],
   "author": "",
