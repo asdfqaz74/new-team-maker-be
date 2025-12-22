@@ -206,7 +206,7 @@ export const getMe = async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({
       success: true,
       message: "현재 로그인한 유저 정보입니다.",
-      data: { user },
+      data: user,
     });
   } catch (error) {
     if (error instanceof ServiceError) {
