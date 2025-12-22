@@ -3,6 +3,9 @@ import * as userService from "@/services/user.service";
 import { ServiceError } from "@/errors";
 import { RegisterUserDTO } from "@/dto/register-user.dto";
 
+/* -------------------------------------------- */
+/*                     회원가입                     */
+/* -------------------------------------------- */
 export const register = async (
   req: Request,
   res: Response,
@@ -34,6 +37,9 @@ export const register = async (
   }
 };
 
+/* -------------------------------------------- */
+/*                      로그인                     */
+/* -------------------------------------------- */
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId, password } = req.body;
@@ -46,7 +52,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 15 * 60 * 1000, // 15분
     });
 
@@ -54,7 +60,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7일
     });
 

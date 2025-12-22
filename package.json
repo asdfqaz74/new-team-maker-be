@@ -7,7 +7,8 @@
     "start": "cross-env NODE_ENV=production node dist/src/app.js",
     "dev": "cross-env NODE_ENV=development nodemon --exec ts-node -r tsconfig-paths/register src/app.ts",
     "build": "tsc && tsc-alias",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy:dev": "rm -rf dist && git pull origin main && npm install && npm run build && NODE_ENV=development pm2 reload all"
   },
   "keywords": [],
   "author": "",
