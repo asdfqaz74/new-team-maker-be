@@ -42,4 +42,17 @@ router.delete(
   userController.deleteSubAccount
 );
 
+// POST /api/users/wait-players - 대기명단 플레이어 추가
+router.post("/wait-players", authMiddleware, userController.addWaitPlayer);
+
+// GET /api/users/wait-players - 대기명단 플레이어 불러오기
+router.get("/wait-players", authMiddleware, userController.getWaitPlayers);
+
+// DELETE /api/users/wait-players/:playerId - 대기명단 플레이어 삭제
+router.delete(
+  "/wait-players/:playerId",
+  authMiddleware,
+  userController.removeWaitPlayer
+);
+
 export default router;
