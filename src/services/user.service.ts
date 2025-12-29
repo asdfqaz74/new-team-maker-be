@@ -1,5 +1,5 @@
 import * as userRepository from "@/repositories/user.repository";
-import { IUser } from "@/models/user.model";
+import { IUser, IUserWaitPlayer } from "@/models/user.model";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { ServiceError, ErrorCode } from "@/errors";
@@ -267,4 +267,75 @@ export const deleteSubAccount = async (userId: string): Promise<IUser> => {
   delete userWithoutPassword.password;
 
   return userWithoutPassword as IUser;
+};
+
+/* -------------------------------------------- */
+/*                  유저 대기명단 추가                  */
+/* -------------------------------------------- */
+export const addUserWaitPlayer = async (
+  userId: string,
+  playerId: string,
+  playerName: string
+): Promise<IUserWaitPlayer[]> => {
+  // 1. 유저 확인
+  const user = await userRepository.findById(userId);
+  if (!user) {
+    throw new ServiceError(ErrorCode.USER_NOT_FOUND);
+  }
+
+  // 2. 대기명단에 이미 있는지 확인
+  const existingPlayer = await userRepository.findWaitPlayer(userId, playerId);
+  if (existingPlayer) {
+    throw new ServiceError(ErrorCode.WAIT_PLAYER_ALREADY_EXISTS);
+  }
+
+  // 3. 대기명단에 추가
+  const updatedUser = await userRepository.addWaitPlayer(
+    userId,
+    playerId,
+    playerName
+  );
+
+  if (!updatedUser) {
+    throw new ServiceError(ErrorCode.USER_NOT_FOUND);
+  }
+
+  return updatedUser.waitPlayers;
+};
+
+/* -------------------------------------------- */
+/*                 유저 대기명단 불러오기                 */
+/* -------------------------------------------- */
+export const getUserWaitPlayers = async (
+  userId: string
+): Promise<IUser["waitPlayers"]> => {
+  // 1. 유저 확인
+  const user = await userRepository.findById(userId);
+  if (!user) {
+    throw new ServiceError(ErrorCode.USER_NOT_FOUND);
+  }
+  return user.waitPlayers;
+};
+
+/* -------------------------------------------- */
+/*                  유저 대기명단 삭제                  */
+/* -------------------------------------------- */
+export const removeUserWaitPlayer = async (
+  userId: string,
+  playerId: string
+): Promise<IUserWaitPlayer[]> => {
+  // 1. 유저 확인
+  const user = await userRepository.findById(userId);
+  if (!user) {
+    throw new ServiceError(ErrorCode.USER_NOT_FOUND);
+  }
+
+  // 2. 대기명단에서 플레이어 제거 ($pull 사용)
+  const updatedUser = await userRepository.removeWaitPlayer(userId, playerId);
+
+  if (!updatedUser) {
+    throw new ServiceError(ErrorCode.USER_NOT_FOUND);
+  }
+
+  return updatedUser.waitPlayers;
 };

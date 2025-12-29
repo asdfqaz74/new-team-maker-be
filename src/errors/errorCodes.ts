@@ -22,6 +22,7 @@ export const ErrorCode = {
   // 공통
   INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
   VALIDATION_ERROR: "VALIDATION_ERROR",
+  WAIT_PLAYER_ALREADY_EXISTS: "WAIT_PLAYER_ALREADY_EXISTS",
 } as const;
 
 export type ErrorCodeType = (typeof ErrorCode)[keyof typeof ErrorCode];
@@ -45,4 +46,5 @@ export const ErrorMessages: Record<ErrorCodeType, string> = {
   SUB_ACCOUNT_NOT_FOUND: "서브 계정이 존재하지 않습니다.",
   INTERNAL_SERVER_ERROR: "서버 내부 오류가 발생했습니다.",
   VALIDATION_ERROR: "입력값 검증에 실패했습니다.",
+  WAIT_PLAYER_ALREADY_EXISTS: "이미 대기명단에 추가된 플레이어입니다.",
 };

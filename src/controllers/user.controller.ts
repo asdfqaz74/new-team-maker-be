@@ -325,3 +325,147 @@ export const deleteSubAccount = async (
     });
   }
 };
+
+/* -------------------------------------------- */
+/*                  유저 대기명단 추가                  */
+/* -------------------------------------------- */
+export const addWaitPlayer = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      res.status(401).json({
+        success: false,
+        error: {
+          code: "UNAUTHORIZED",
+          message: "인증이 필요합니다.",
+        },
+      });
+      return;
+    }
+    const { playerId, playerName } = req.body;
+    if (!playerId || !playerName) {
+      res.status(400).json({
+        success: false,
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "플레이어 ID와 이름을 입력해주세요.",
+        },
+      });
+      return;
+    }
+    const user = await userService.addUserWaitPlayer(
+      userId,
+      playerId,
+      playerName
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "대기명단에 플레이어가 추가되었습니다.",
+      data: user,
+    });
+  } catch (error) {
+    if (error instanceof ServiceError) {
+      res.status(error.statusCode).json(error.toJSON());
+      return;
+    }
+    res.status(500).json({
+      success: false,
+      error: {
+        code: "INTERNAL_SERVER_ERROR",
+        message: (error as Error).message,
+      },
+    });
+  }
+};
+
+/* -------------------------------------------- */
+/*                 유저 대기명단 불러오기                 */
+/* -------------------------------------------- */
+export const getWaitPlayers = async (req: Request, res: Response) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      res.status(401).json({
+        success: false,
+        error: {
+          code: "UNAUTHORIZED",
+          message: "인증이 필요합니다.",
+        },
+      });
+      return;
+    }
+
+    const waitPlayers = await userService.getUserWaitPlayers(userId);
+
+    res.status(200).json({
+      success: true,
+      message: "대기명단이 조회되었습니다.",
+      data: waitPlayers,
+    });
+  } catch (error) {
+    if (error instanceof ServiceError) {
+      res.status(error.statusCode).json(error.toJSON());
+      return;
+    }
+    res.status(500).json({
+      success: false,
+      error: {
+        code: "INTERNAL_SERVER_ERROR",
+        message: (error as Error).message,
+      },
+    });
+  }
+};
+
+/* -------------------------------------------- */
+/*                  유저 대기명단 삭제                  */
+/* -------------------------------------------- */
+export const removeWaitPlayer = async (req: Request, res: Response) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      res.status(401).json({
+        success: false,
+        error: {
+          code: "UNAUTHORIZED",
+          message: "인증이 필요합니다.",
+        },
+      });
+      return;
+    }
+    const { playerId } = req.params;
+    if (!playerId) {
+      res.status(400).json({
+        success: false,
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "플레이어 ID가 필요합니다.",
+        },
+      });
+      return;
+    }
+    const user = await userService.removeUserWaitPlayer(userId, playerId);
+
+    res.status(200).json({
+      success: true,
+      message: "대기명단에서 플레이어가 삭제되었습니다.",
+      data: user,
+    });
+  } catch (error) {
+    if (error instanceof ServiceError) {
+      res.status(error.statusCode).json(error.toJSON());
+      return;
+    }
+    res.status(500).json({
+      success: false,
+      error: {
+        code: "INTERNAL_SERVER_ERROR",
+        message: (error as Error).message,
+      },
+    });
+  }
+};

@@ -1,4 +1,4 @@
-import User, { IUser } from "@/models/user.model";
+import User, { IUser, IUserWaitPlayer } from "@/models/user.model";
 
 // MongoDB ObjectId로 찾기
 export const findById = async (id: string): Promise<IUser | null> => {
@@ -40,4 +40,47 @@ export const update = async (
 export const existsSubAccountId = async (subId: string): Promise<boolean> => {
   const user = await User.findOne({ "subAccount.subId": subId });
   return !!user;
+};
+
+// 유저 대기명단 플레이어 찾기 (중복 체크)
+export const findWaitPlayer = async (
+  userId: string,
+  playerId: string
+): Promise<boolean> => {
+  const user = await User.findOne({ userId, "waitPlayers.id": playerId });
+  return !!user;
+};
+
+// 유저 대기명단 플레이어 추가
+export const addWaitPlayer = async (
+  userId: string,
+  playerId: string,
+  playerName: string
+): Promise<IUser | null> => {
+  return await User.findOneAndUpdate(
+    { userId },
+    { $push: { waitPlayers: { id: playerId, name: playerName } } },
+    { new: true }
+  );
+};
+
+// 유저 대기명단 불러오기
+export const getWaitPlayers = async (
+  userId: string
+): Promise<IUserWaitPlayer[]> => {
+  const user = await User.findOne({ userId }).select("waitPlayers -_id").lean();
+
+  return user?.waitPlayers ?? [];
+};
+
+// 유저 대기명단 플레이어 삭제
+export const removeWaitPlayer = async (
+  userId: string,
+  playerId: string
+): Promise<IUser | null> => {
+  return await User.findByIdAndUpdate(
+    userId,
+    { $pull: { waitPlayers: { id: playerId } } },
+    { new: true }
+  );
 };

@@ -14,6 +14,12 @@ export interface IUser extends Document {
   subAccount?: ISubAccount;
   createdAt: Date;
   updatedAt: Date;
+  waitPlayers: IUserWaitPlayer[];
+}
+
+export interface IUserWaitPlayer {
+  id: string;
+  name: string;
 }
 
 const userSchema = new Schema<IUser>(
@@ -27,6 +33,12 @@ const userSchema = new Schema<IUser>(
       password: { type: String },
       isEnabled: { type: Boolean, default: false },
     },
+    waitPlayers: [
+      {
+        id: { type: String, required: true },
+        name: { type: String, required: true },
+      },
+    ],
   },
   { timestamps: true }
 );
