@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import * as userRepository from "@/repositories/user.repository";
 
 // 사용자 역할 타입
 export type UserRole = "owner" | "viewer";
@@ -27,25 +28,18 @@ interface TokenPayload {
  * 인증 미들웨어
  * - 쿠키에서 accessToken을 추출하여 검증
  * - 검증 성공 시 req.user에 사용자 정보 저장
- * - 검증 실패 시 401 에러 반환
+ * - 검증 실패(만료) 시 refreshToken으로 갱신 시도
  */
-export const authMiddleware = (
+export const authMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
-): void => {
+): Promise<void> => {
   try {
     const accessToken = req.cookies.accessToken;
 
     if (!accessToken) {
-      res.status(401).json({
-        success: false,
-        error: {
-          code: "UNAUTHORIZED",
-          message: "인증이 필요합니다. 로그인해주세요.",
-        },
-      });
-      return;
+      throw new Error("No access token");
     }
 
     // 토큰 검증
@@ -62,19 +56,74 @@ export const authMiddleware = (
 
     next();
   } catch (error) {
-    // 토큰 만료
-    if (error instanceof jwt.TokenExpiredError) {
-      res.status(401).json({
-        success: false,
-        error: {
-          code: "TOKEN_EXPIRED",
-          message: "토큰이 만료되었습니다. 토큰을 갱신해주세요.",
-        },
-      });
-      return;
+    // 토큰 만료 또는 없음 -> 리프레시 시도
+    if (
+      error instanceof jwt.TokenExpiredError ||
+      (error instanceof Error && error.message === "No access token")
+    ) {
+      const refreshToken = req.cookies.refreshToken;
+
+      if (!refreshToken) {
+        res.status(401).json({
+          success: false,
+          error: {
+            code: "UNAUTHORIZED",
+            message: "인증이 필요합니다. 로그인해주세요.",
+          },
+        });
+        return;
+      }
+
+      try {
+        // 리프레시 토큰 검증
+        const decodedRefresh = jwt.verify(
+          refreshToken,
+          process.env.JWT_REFRESH_SECRET || "refresh-secret"
+        ) as TokenPayload;
+
+        // 유저 존재 확인 (선택 사항이지만 권장)
+        const user = await userRepository.findById(decodedRefresh.id);
+        if (!user) {
+          throw new Error("User not found");
+        }
+
+        // 새 액세스 토큰 발급
+        const newAccessToken = jwt.sign(
+          { id: user._id, role: decodedRefresh.role || "owner" },
+          process.env.JWT_SECRET || "secret",
+          { expiresIn: "15m" }
+        );
+
+        // 쿠키 갱신
+        res.cookie("accessToken", newAccessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+          maxAge: 15 * 60 * 1000, // 15분
+        });
+
+        // req.user 설정
+        req.user = {
+          id: user._id.toString(),
+          role: decodedRefresh.role || "owner",
+        };
+
+        next();
+        return;
+      } catch (refreshError) {
+        // 리프레시 실패 (만료되거나 유효하지 않음)
+        res.status(401).json({
+          success: false,
+          error: {
+            code: "TOKEN_EXPIRED",
+            message: "세션이 만료되었습니다. 다시 로그인해주세요.",
+          },
+        });
+        return;
+      }
     }
 
-    // 유효하지 않은 토큰
+    // 그 외 유효하지 않은 토큰
     res.status(401).json({
       success: false,
       error: {
