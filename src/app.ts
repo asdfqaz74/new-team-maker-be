@@ -23,7 +23,11 @@ const PORT: number = Number(process.env.PORT) || 3001;
 // Middleware
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173", // 프론트엔드 주소
+    origin: [
+      process.env.CLIENT_URL || "http://localhost:5173",
+      "https://team-maker.xyz",
+      "https://www.team-maker.xyz",
+    ], // 프론트엔드 주소
     credentials: true, // 쿠키 허용
   })
 );
