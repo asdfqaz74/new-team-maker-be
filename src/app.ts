@@ -25,6 +25,7 @@ app.use(
   cors({
     origin: [
       process.env.CLIENT_URL || "http://localhost:5173",
+      "http://localhost:3000",
       "https://team-maker.xyz",
       "https://www.team-maker.xyz",
     ], // 프론트엔드 주소
