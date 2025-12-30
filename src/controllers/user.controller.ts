@@ -1,7 +1,17 @@
-import type { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response, CookieOptions } from "express";
 import * as userService from "@/services/user.service";
 import { ServiceError } from "@/errors";
 import { RegisterUserDTO } from "@/dto/register-user.dto";
+
+const isProd = process.env.NODE_ENV === "production";
+
+const cookieOptions: CookieOptions = {
+  httpOnly: true,
+  secure: isProd,
+  sameSite: isProd ? "none" : "lax",
+  maxAge: 15 * 60 * 1000, // 15분
+  ...(isProd && { domain: ".team-maker.xyz" }),
+};
 
 /* -------------------------------------------- */
 /*                     회원가입                     */
@@ -49,18 +59,11 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     );
 
     // Access Token 쿠키 설정 (15분)
-    res.cookie("accessToken", accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 15 * 60 * 1000, // 15분
-    });
+    res.cookie("accessToken", accessToken, cookieOptions);
 
     // Refresh Token 쿠키 설정 (7일)
     res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      ...cookieOptions,
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7일
     });
 

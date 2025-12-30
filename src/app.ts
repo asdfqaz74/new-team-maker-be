@@ -32,6 +32,7 @@ app.use(
     credentials: true, // 쿠키 허용
   })
 );
+
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(express.json());
