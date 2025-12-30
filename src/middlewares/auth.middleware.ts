@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import * as userRepository from "@/repositories/user.repository";
+import { cookieOptions } from "@/config/cookie";
 
 // 사용자 역할 타입
 export type UserRole = "owner" | "viewer";
@@ -95,12 +96,7 @@ export const authMiddleware = async (
         );
 
         // 쿠키 갱신
-        res.cookie("accessToken", newAccessToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-          maxAge: 15 * 60 * 1000, // 15분
-        });
+        res.cookie("accessToken", newAccessToken, cookieOptions);
 
         // req.user 설정
         req.user = {

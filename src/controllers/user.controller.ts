@@ -1,17 +1,12 @@
-import type { NextFunction, Request, Response, CookieOptions } from "express";
+import type { NextFunction, Request, Response } from "express";
 import * as userService from "@/services/user.service";
 import { ServiceError } from "@/errors";
 import { RegisterUserDTO } from "@/dto/register-user.dto";
-
-const isProd = process.env.NODE_ENV === "production";
-
-const cookieOptions: CookieOptions = {
-  httpOnly: true,
-  secure: isProd,
-  sameSite: isProd ? "none" : "lax",
-  maxAge: 15 * 60 * 1000, // 15분
-  ...(isProd && { domain: ".team-maker.xyz" }),
-};
+import {
+  cookieOptions,
+  refreshCookieOptions,
+  clearCookieOptions,
+} from "@/config/cookie";
 
 /* -------------------------------------------- */
 /*                     회원가입                     */
@@ -90,16 +85,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 export const logout = async (req: Request, res: Response): Promise<void> => {
   try {
     // 두 토큰 모두 삭제
-    res.clearCookie("accessToken", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    });
-    res.clearCookie("refreshToken", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    });
+    res.clearCookie("accessToken", clearCookieOptions);
+    res.clearCookie("refreshToken", clearCookieOptions);
     res.status(200).json({
       success: true,
       message: "성공적으로 로그아웃 되었습니다.",
@@ -165,12 +152,7 @@ export const refresh = async (req: Request, res: Response): Promise<void> => {
     const { accessToken } = await userService.refreshAccessToken(refreshToken);
 
     // 새 Access Token 쿠키 설정
-    res.cookie("accessToken", accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 15 * 60 * 1000, // 15분
-    });
+    res.cookie("accessToken", accessToken, cookieOptions);
 
     res.status(200).json({
       success: true,
