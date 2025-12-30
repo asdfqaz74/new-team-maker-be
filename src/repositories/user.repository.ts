@@ -47,7 +47,7 @@ export const findWaitPlayer = async (
   userId: string,
   playerId: string
 ): Promise<boolean> => {
-  const user = await User.findOne({ userId, "waitPlayers.id": playerId });
+  const user = await User.findOne({ _id: userId, "waitPlayers.id": playerId });
   return !!user;
 };
 
@@ -57,8 +57,8 @@ export const addWaitPlayer = async (
   playerId: string,
   playerName: string
 ): Promise<IUser | null> => {
-  return await User.findOneAndUpdate(
-    { userId },
+  return await User.findByIdAndUpdate(
+    userId,
     { $push: { waitPlayers: { id: playerId, name: playerName } } },
     { new: true }
   );
@@ -68,7 +68,7 @@ export const addWaitPlayer = async (
 export const getWaitPlayers = async (
   userId: string
 ): Promise<IUserWaitPlayer[]> => {
-  const user = await User.findOne({ userId }).select("waitPlayers -_id").lean();
+  const user = await User.findById(userId).select("waitPlayers -_id").lean();
 
   return user?.waitPlayers ?? [];
 };
