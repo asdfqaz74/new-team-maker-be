@@ -126,6 +126,7 @@ export interface IMatch extends Document {
   createdAt: Date;
   updatedAt: Date;
   banChampions: mongoose.Types.ObjectId[]; // Champion 모델 참조
+  owner: mongoose.Types.ObjectId; // User 모델 참조
 }
 
 // 스키마 정의
@@ -281,6 +282,7 @@ const matchSchema = new Schema<IMatch>(
     metadata: { type: matchMetadataSchema, required: true },
     playedAt: { type: Date },
     banChampions: [{ type: Schema.Types.ObjectId, ref: "Champion" }],
+    owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: true }
 );
@@ -290,7 +292,7 @@ playerStatsSchema.index({ matchId: 1 });
 playerStatsSchema.index({ playerId: 1 });
 playerStatsSchema.index({ champion: 1 });
 playerStatsSchema.index({ team: 1, position: 1 });
-
+playerStatsSchema.index({ owner: 1 });
 const Match: Model<IMatch> = mongoose.model<IMatch>("Match", matchSchema);
 const PlayerStats: Model<IPlayerStats> = mongoose.model<IPlayerStats>(
   "PlayerStats",

@@ -17,7 +17,10 @@ import {
 } from "../models/static.model";
 import Champion from "../models/champion.model";
 import mongoose from "mongoose";
-import { getPlayerRecentStats } from "@/repositories/match.repository";
+import {
+  getPlayerRecentStats,
+  getUserRecentMatches,
+} from "@/repositories/match.repository";
 
 // ============================================
 // 타입 정의
@@ -135,7 +138,7 @@ export const parseAndPreview = (filePath: string): MatchPreviewResponseDTO => {
 // ============================================
 
 /** 매치 저장 메인 함수 */
-export const saveMatch = async (data: SaveMatchRequestDTO) => {
+export const saveMatch = async (data: SaveMatchRequestDTO, ownerId: string) => {
   // 1. 밴 챔피언 ObjectId 배열 생성
   const banChampionIds =
     data.banChampions?.map((ban) => new mongoose.Types.ObjectId(ban._id)) || [];
@@ -145,6 +148,7 @@ export const saveMatch = async (data: SaveMatchRequestDTO) => {
     metadata: data.metadata,
     playedAt: data.playedAt ? new Date(data.playedAt) : new Date(),
     banChampions: banChampionIds,
+    owner: new mongoose.Types.ObjectId(ownerId),
   });
 
   // 3. PlayerStats 문서 생성 및 저장
@@ -550,4 +554,13 @@ export const getRecentMatchesByPlayer = async (
     pageSize,
     matches: data,
   };
+};
+
+/* -------------------------------------------- */
+/*                유저 대시보드 최근 매치 조회             */
+/* -------------------------------------------- */
+export const getUserDashboardRecentMatches = async (
+  userId: string
+): Promise<any[]> => {
+  return await getUserRecentMatches(userId);
 };

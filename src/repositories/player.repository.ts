@@ -22,6 +22,16 @@ export const getPlayersDetailList = async (userId: string): Promise<any[]> => {
   return players;
 };
 
+// 마이페이지 플레이어 목록 조회
+export const getMyPagePlayersList = async (userId: string): Promise<any[]> => {
+  const plyaers = await Player.find({ owner: userId })
+    .sort({ createdAt: -1 })
+    .limit(10)
+    .select("-owner -__v -createdAt -updatedAt -puuid -recentStats -_id");
+
+  return plyaers;
+};
+
 // 플레이어 아이디 조회
 export const getPlayerIdById = async (
   playerId: string

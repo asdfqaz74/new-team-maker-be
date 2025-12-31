@@ -1,6 +1,7 @@
 import { uploadRofl } from "@/middlewares/upload.middleware";
 import { Router } from "express";
 import * as matchController from "@/controllers/match.controller";
+import { authMiddleware } from "@/middlewares/auth.middleware";
 
 const router: Router = Router();
 
@@ -8,7 +9,7 @@ const router: Router = Router();
 router.post("/preview", uploadRofl, matchController.upload);
 
 // 매치 저장 (유저 매핑 포함)
-router.post("/save", matchController.save);
+router.post("/save", authMiddleware, matchController.save);
 
 // 매치 삭제
 router.delete("/delete/:matchId", matchController.remove);

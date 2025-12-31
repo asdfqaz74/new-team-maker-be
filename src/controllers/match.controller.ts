@@ -46,6 +46,18 @@ export const save = async (req: Request, res: Response): Promise<void> => {
   try {
     const data: SaveMatchRequestDTO = req.body;
 
+    const userId = req.user?.id;
+    if (!userId) {
+      res.status(401).json({
+        success: false,
+        error: {
+          code: "UNAUTHORIZED",
+          message: "인증이 필요합니다. 로그인해주세요.",
+        },
+      });
+      return;
+    }
+
     // 유효성 검사
     if (
       !data.metadata ||
@@ -75,7 +87,7 @@ export const save = async (req: Request, res: Response): Promise<void> => {
     }
 
     // 매치 저장
-    const result = await saveMatch(data);
+    const result = await saveMatch(data, userId);
 
     res.status(201).json({
       success: true,

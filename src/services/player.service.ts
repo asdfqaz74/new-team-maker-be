@@ -1,6 +1,7 @@
 import { riotApi } from "@/api/riot.api";
 import Player from "@/models/player.model";
 import {
+  getMyPagePlayersList,
   getPlayersDetailList,
   getSimplePlayerList,
 } from "@/repositories/player.repository";
@@ -119,4 +120,14 @@ export const getPlayersDetail = async (userId: string) => {
   const players = await getPlayersDetailList(userId);
 
   return players;
+};
+
+// 마이페이지 플레이어 목록 조회
+export const getMyPagePlayerList = async (userId: string) => {
+  const players = await getMyPagePlayersList(userId);
+
+  const playersRowFirst = players.slice(0, 5);
+  const playersRowSecond = players.slice(5, 10);
+
+  return { playersRowFirst, playersRowSecond };
 };
