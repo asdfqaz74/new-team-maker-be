@@ -6,6 +6,7 @@ import championRoutes from "./champion.routes";
 import staticRoutes from "./static.routes";
 import teamMatchRoutes from "./team-match.routes";
 import mypageRoutes from "./mypage.routes";
+import initRoutes from "./init.routes";
 
 const router: Router = Router();
 
@@ -25,5 +26,6 @@ router.use("/champions", championRoutes);
 router.use("/statics", staticRoutes);
 router.use("/team-match", teamMatchRoutes);
 router.use("/mypage", mypageRoutes);
+router.use("/init", initRoutes);
 
 export default router;

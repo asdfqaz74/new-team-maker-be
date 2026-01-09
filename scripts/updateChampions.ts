@@ -405,7 +405,7 @@ async function updateChampions(): Promise<void> {
                   championId: champ.id,
                   championName: champ.name,
                   fromVersion: existing.version,
-                  toVersion: champ.version,
+                  toVersion: latestVersion,
                   patchDate: new Date(),
                   spellChanges,
                   statChanges,
